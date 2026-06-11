@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Change Management Framework — Cantilever Holdings LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#8B6914;
+  --gold-light:#C8A96E;
+  --gold-pale:#F5EDD8;
+  --ink:#1A1410;
+  --ink-mid:#4A4238;
+  --ink-light:#7A7060;
+  --ink-faint:#A8A098;
+  --paper:#FDFAF5;
+  --paper-warm:#F7F2E8;
+  --paper-rule:#EDE8DE;
+  --blue:#1A4A7A;
+  --blue-light:#2E6BAD;
+  --blue-pale:#EBF2FA;
+  --teal:#2A7A6A;
+  --teal-pale:#EBF5F2;
+  --sage:#5A7A4A;
+  --sage-pale:#EFF5EB;
+  --plum:#6A4A7A;
+  --plum-pale:#F2EBF5;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* HEADER */
+.header{
+  background:var(--paper);
+  border-bottom:1px solid var(--paper-rule);
+  padding:2rem 3rem 1.5rem;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 1px 12px rgba(139,105,20,0.06);
+}
+.header-left{}
+.eyebrow{
+  font-family:'DM Sans',sans-serif;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:0.3rem;
+}
+.header h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  font-weight:500;
+  color:var(--ink);
+  letter-spacing:0.01em;
+  line-height:1.1;
+}
+.header-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;
+  color:var(--ink-light);
+  font-style:italic;
+  margin-top:0.2rem;
+}
+.header-ornament{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  opacity:0.3;
+}
+.header-ornament span{
+  display:block;
+  background:var(--gold);
+  border-radius:1px;
+}
+.header-ornament span:nth-child(1){width:32px;height:2px}
+.header-ornament span:nth-child(2){width:20px;height:1px}
+.header-ornament span:nth-child(3){width:8px;height:1px}
+
+/* TABS */
+.tabs{
+  display:flex;
+  padding:0 3rem;
+  background:var(--paper);
+  border-bottom:1px solid var(--paper-rule);
+  overflow-x:auto;
+  gap:0;
+}
+.tab{
+  font-family:'DM Sans',sans-serif;
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  background:none;
+  border:none;
+  border-bottom:2px solid transparent;
+  padding:0.85rem 1.4rem 0.75rem;
+  cursor:pointer;
+  margin-bottom:-1px;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.tab:hover{color:var(--ink-mid)}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* PANEL */
+.panel{display:none;padding:2.5rem 3rem;animation:fadeIn 0.25s ease}
+.panel.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION HEADS */
+.sec-label{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:0.4rem;
+}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;
+  font-weight:500;
+  color:var(--ink);
+  margin-bottom:0.3rem;
+  line-height:1.2;
+}
+.sec-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;
+  color:var(--ink-light);
+  font-style:italic;
+  margin-bottom:2rem;
+  line-height:1.6;
+}
+
+/* RULE */
+.rule{height:1px;background:var(--paper-rule);margin:2rem 0}
+
+/* ── FRAMEWORK TAB ── */
+.pillar-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--paper-rule);
+  border:1px solid var(--paper-rule);
+  border-radius:6px;
+  overflow:hidden;
+  margin-bottom:2.5rem;
+}
+.pillar-btn{
+  background:var(--paper);
+  border:none;
+  cursor:pointer;
+  padding:1.1rem 1rem;
+  text-align:left;
+  border-top:3px solid transparent;
+  transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.pillar-btn:hover{background:var(--paper-warm)}
+.pillar-btn.on{background:var(--paper-warm)}
+.p-num{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:0.2em;
+  color:var(--ink-faint);
+  margin-bottom:0.25rem;
+}
+.pillar-btn.on .p-num{color:inherit;opacity:0.7}
+.p-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  font-weight:500;
+  color:var(--ink-mid);
+}
+.pillar-btn.on .p-name{color:var(--ink)}
+
+.pillar-detail{
+  display:grid;
+  grid-template-columns:1fr 1.8fr;
+  gap:3rem;
+  align-items:start;
+}
+.p-bg-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;
+  font-weight:400;
+  line-height:1;
+  opacity:0.07;
+  margin-bottom:-2rem;
+  font-style:italic;
+}
+.p-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  font-weight:500;
+  color:var(--ink);
+  margin-bottom:0.3rem;
+}
+.p-tagline{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin-bottom:0.9rem;
+}
+.p-desc{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;
+  color:var(--ink-mid);
+  line-height:1.75;
+  font-style:italic;
+}
+.items-head{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:0.85rem;
+}
+.item-row{
+  display:flex;
+  align-items:flex-start;
+  gap:0.75rem;
+  padding:0.6rem 0;
+  border-bottom:1px solid var(--paper-rule);
+}
+.item-dot{
+  width:5px;height:5px;
+  border-radius:50%;
+  margin-top:0.42rem;
+  flex-shrink:0;
+}
+.item-text{font-size:13px;color:var(--ink-mid);line-height:1.55}
+
+/* Flow bar */
+.flow-bar{
+  display:flex;
+  align-items:center;
+  margin-top:2.5rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--paper-rule);
+}
+.flow-step{flex:1;text-align:center}
+.flow-dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--paper-rule);
+  margin:0 auto 0.3rem;
+  transition:all 0.3s;
+}
+.flow-label{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  transition:color 0.3s;
+}
+.flow-line{flex:1;height:1px;background:var(--paper-rule);max-width:3rem;margin:0 auto}
+
+/* ── PEOPLE MODEL TAB ── */
+.adkar-item{
+  display:grid;
+  grid-template-columns:2.8rem 1fr;
+  gap:1.2rem;
+  align-items:center;
+  padding:1rem 1.2rem;
+  background:var(--paper);
+  border:1px solid var(--paper-rule);
+  border-radius:5px;
+  cursor:pointer;
+  margin-bottom:3px;
+  transition:all 0.2s;
+}
+.adkar-item:hover{background:var(--paper-warm)}
+.adkar-item.on{background:var(--blue-pale);border-color:#C0D8F0}
+.a-letter{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;
+  font-style:italic;
+  color:var(--paper-rule);
+  text-align:center;
+  transition:color 0.2s;
+  font-weight:500;
+}
+.adkar-item.on .a-letter{color:var(--blue-light)}
+.a-word{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:0.15rem}
+.a-phrase{font-size:12px;color:var(--ink-light);font-style:italic}
+.a-note{
+  display:none;
+  margin-top:0.6rem;
+  padding:0.6rem 0.85rem;
+  background:white;
+  border-radius:4px;
+  font-size:12px;
+  color:var(--blue);
+  line-height:1.65;
+  border-left:2px solid var(--blue-light);
+}
+.adkar-item.on .a-note{display:block}
+
+/* ── LEVERS TAB ── */
+.levers-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:1.5rem}
+.lever-card{
+  display:flex;
+  align-items:center;
+  gap:0.9rem;
+  padding:0.9rem 1.1rem;
+  background:var(--paper-warm);
+  border-radius:4px;
+  border:1px solid var(--paper-rule);
+}
+.l-num{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:0.1em;
+  color:var(--gold-light);
+  width:1.1rem;
+  text-align:right;
+  flex-shrink:0;
+}
+.l-div{width:1px;height:1.6rem;background:var(--paper-rule);flex-shrink:0}
+.l-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:0.1rem}
+.l-desc{font-size:11.5px;color:var(--ink-light)}
+.principle{
+  display:flex;
+  gap:1.2rem;
+  padding:1.2rem 1.4rem;
+  background:var(--gold-pale);
+  border-radius:5px;
+  border-left:3px solid var(--gold);
+}
+.principle-bar{width:0;flex-shrink:0}
+.p-eyebrow{
+  font-size:9px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.35rem;
+}
+.p-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;
+  color:var(--ink-mid);
+  line-height:1.75;
+  font-style:italic;
+}
+
+/* ── CASE STUDIES TAB ── */
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem}
+.case-card{
+  padding:1.1rem 1.2rem;
+  background:var(--paper-warm);
+  border:1px solid var(--paper-rule);
+  border-radius:5px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.case-card:hover{border-color:var(--gold-light)}
+.case-card.on{background:var(--gold-pale);border-color:var(--gold)}
+.c-label{
+  font-size:9px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:0.3rem;
+}
+.case-card.on .c-label{color:var(--gold)}
+.c-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:0.3rem}
+.c-desc{font-size:12px;color:var(--ink-light);line-height:1.55}
+
+.case-detail{
+  background:var(--paper);
+  border:1px solid var(--paper-rule);
+  border-radius:6px;
+  padding:1.5rem 1.8rem;
+}
+.cd-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;
+  font-weight:500;
+  color:var(--ink);
+  margin-bottom:0.25rem;
+}
+.cd-sub{
+  font-size:12px;
+  color:var(--ink-light);
+  font-style:italic;
+  margin-bottom:1.2rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--paper-rule);
+}
+.cd-approach{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:0.75rem;
+}
+.cd-steps{list-style:none;margin-bottom:1.25rem}
+.cd-step{
+  display:flex;
+  gap:0.85rem;
+  padding:0.45rem 0;
+  border-bottom:1px solid var(--paper-rule);
+  font-size:13px;
+  color:var(--ink-mid);
+  align-items:flex-start;
+}
+.cd-step-num{
+  font-size:10px;font-weight:500;
+  color:var(--gold);
+  width:1rem;flex-shrink:0;
+  margin-top:0.18rem;
+}
+.cd-metrics{display:flex;gap:0;border-top:1px solid var(--paper-rule);padding-top:1.1rem}
+.cd-metric{flex:1;text-align:center;padding:0.5rem}
+.cd-metric+.cd-metric{border-left:1px solid var(--paper-rule)}
+.m-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;
+  font-weight:500;
+  color:var(--gold);
+  line-height:1.1;
+  margin-bottom:0.2rem;
+}
+.m-label{font-size:11px;color:var(--ink-light)}
+
+/* ── USE CASES TAB ── */
+.use-cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem}
+.uc-card{
+  padding:1.2rem;
+  background:var(--paper-warm);
+  border:1px solid var(--paper-rule);
+  border-radius:5px;
+  transition:all 0.2s;
+  cursor:default;
+}
+.uc-card:hover{box-shadow:0 2px 12px rgba(139,105,20,0.08);border-color:var(--gold-light)}
+.uc-icon{
+  font-size:1.2rem;
+  margin-bottom:0.6rem;
+  display:block;
+}
+.uc-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:0.4rem}
+.uc-desc{font-size:12px;color:var(--ink-light);line-height:1.6}
+.uc-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:0.75rem}
+.uc-tag{
+  font-size:10px;
+  padding:2px 7px;
+  background:var(--paper);
+  border:1px solid var(--paper-rule);
+  border-radius:20px;
+  color:var(--ink-faint);
+}
+
+/* FOOTER */
+.footer{
+  padding:1.2rem 3rem;
+  border-top:1px solid var(--paper-rule);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--paper-warm);
+}
+.footer-l{font-size:11px;color:var(--ink-faint)}
+.footer-r{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;
+  color:var(--ink-faint);
+  font-style:italic;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="eyebrow">Cantilever Holdings LLC · Transformation Practice</div>
+    <h1>Change Management Framework</h1>
+    <div class="header-tagline">Organizations don't change. People change.</div>
+  </div>
+  <div class="header-ornament">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab on" onclick="switchTab(0)">Framework</button>
+  <button class="tab" onclick="switchTab(1)">People Model</button>
+  <button class="tab" onclick="switchTab(2)">Levers</button>
+  <button class="tab" onclick="switchTab(3)">Case Studies</button>
+  <button class="tab" onclick="switchTab(4)">Use Cases</button>
+</div>
+
+<!-- PANEL 0: FRAMEWORK -->
+<div class="panel on" id="p0">
+  <div class="sec-label">Four-Pillar Delivery Model</div>
+  <div class="sec-title">The Cantilever Change Framework</div>
+  <div class="sec-sub">A structured, human-centered approach to enterprise transformation — from discovery through sustainable adoption.</div>
+  <div class="pillar-grid" id="pillarGrid"></div>
+  <div id="pillarDetail"></div>
+  <div class="flow-bar" id="flowBar"></div>
+</div>
+
+<!-- PANEL 1: PEOPLE MODEL -->
+<div class="panel" id="p1">
+  <div class="sec-label">The ProSci ADKAR Model</div>
+  <div class="sec-title">Change Follows a Natural Progression</div>
+  <div class="sec-sub">Before someone invests in change, they must first have the desire to change. Leaders and managers must personally accept change before leading others through it.</div>
+  <div id="adkarList"></div>
+</div>
+
+<!-- PANEL 2: LEVERS -->
+<div class="panel" id="p2">
+  <div class="sec-label">Eight Activation Levers</div>
+  <div class="sec-title">Identify What Best Supports Your Audiences</div>
+  <div class="sec-sub">A good change plan guides individuals through change and addresses any roadblocks or barrier points along the way.</div>
+  <div class="levers-grid" id="leversGrid"></div>
+  <div class="principle">
+    <div>
+      <div class="p-eyebrow">Cantilever Principle</div>
+      <div class="p-quote">Governance earns its place through demonstrated value, not mandate. The most durable change is the kind people choose to sustain — because they understood it, shaped it, and saw themselves in it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 3: CASE STUDIES -->
+<div class="panel" id="p3">
+  <div class="sec-label">Practitioner-Led Case Studies</div>
+  <div class="sec-title">Change Management in Practice</div>
+  <div class="sec-sub">The following examples draw on real enterprise transformation work — anonymized for client confidentiality.</div>
+  <div class="cases-grid" id="casesGrid"></div>
+  <div id="caseDetail"></div>
+</div>
+
+<!-- PANEL 4: USE CASES -->
+<div class="panel" id="p4">
+  <div class="sec-label">Where We Work</div>
+  <div class="sec-title">Enterprise Use Cases</div>
+  <div class="sec-sub">Cantilever brings structured change leadership to complex technology and organizational transformation programs across industries.</div>
+  <div class="use-cases-grid" id="ucGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">© 2026 Cantilever Holdings LLC · Confidential</div>
+  <div class="footer-r">"Felix, qui potuit rerum cognoscere causas" — Virgil</div>
+</div>
+
+<script>
+const pillars=[
+  {label:"Discover",num:"01",tagline:"Understand the landscape",
+   desc:"Map program objectives, stakeholder dynamics, change impacts, and barrier points before a single action is taken.",
+   color:"#8B6914",bg:"#F5EDD8",
+   items:["Understand scope and boundaries","Identify impacted audiences","Identify change sponsors and key partners","Conduct impact assessment","Develop change strategy","Align with executive sponsors"]},
+  {label:"Prepare",num:"02",tagline:"Build the conditions for adoption",
+   desc:"Design and deliver a comprehensive engagement, communications, and learning plan that meets people where they are.",
+   color:"#2A7A6A",bg:"#EBF5F2",
+   items:["Bring together core change team","Develop engagement plan","Create awareness with targeted communications","Enable adoption through skill-building and learning tools","Align success measures with program goals"]},
+  {label:"Reinforce",num:"03",tagline:"Make the change real",
+   desc:"Evolve change activities to manage resistance, sustain momentum, and embed new behaviors into daily operations.",
+   color:"#1A4A7A",bg:"#EBF2FA",
+   items:["Reinforce new processes and ensure leadership modeling","Analyze feedback to diagnose gaps and resistance","Celebrate and communicate successes","Integrate change into ongoing processes","Measure and report on success"]},
+  {label:"Sustain",num:"04",tagline:"Lock in the future state",
+   desc:"Incorporate change concepts into day-to-day support processes so the organization never slides back.",
+   color:"#6A4A7A",bg:"#F2EBF5",
+   items:["Partner with stakeholders to implement a service model","Adapt change plans to respond to evolving stakeholder needs","Establish ongoing reinforcement cadence"]}
+];
+
+const adkar=[
+  {l:"A",word:"Awareness",phrase:"I understand the need for change",note:null},
+  {l:"D",word:"Desire",phrase:"I have decided to support this change",note:"Leaders and managers must personally accept change before leading others through it. This is the critical inflection point — the desire to change must be genuine, not compliant."},
+  {l:"K",word:"Knowledge",phrase:"I know how to make this change",note:null},
+  {l:"A",word:"Ability",phrase:"I am able to apply new skills and behaviors",note:null},
+  {l:"R",word:"Reinforcement",phrase:"I am operating successfully in the future state",note:null}
+];
+
+const levers=[
+  {name:"Leadership",desc:"Modeling behavior at every level"},
+  {name:"Listening",desc:"Actively soliciting input and feedback"},
+  {name:"Involvement",desc:"Engaging key stakeholders early"},
+  {name:"Communication",desc:"Creating meaningful touchpoints"},
+  {name:"Learning",desc:"Developing new skills and behaviors"},
+  {name:"Governance",desc:"Thoughtfully managing the process"},
+  {name:"Reinforcement",desc:"Motivating the right behaviors"},
+  {name:"Measurement",desc:"Tracking and celebrating success"}
+];
+
+const cases=[
+  {label:"Case Study 1",title:"Client Engagement Strategy Overhaul",
+   desc:"A financial services innovation center transforms its client tour and engagement program from generic content to a precision-targeted strategy — yielding measurable sales impact. Recognized as academic distinction, Tufts MS Engineering Management capstone.",
+   context:"An enterprise experience center hosting 66% external visitors (sales prospects, regulators, press, benchmarking partners) across nine business units. Generic content was failing to resonate with high-value audiences at the critical moment of client decision-making.",
+   approach:[
+     "Identified the core pain point: one-size-fits-all tour content was misaligned with a highly diverse visitor base",
+     "Conducted visitor and tour profile research segmented by business unit and audience type",
+     "Applied Pareto analysis to uncover key engagement drivers — cybersecurity (75%), innovation (67%), and pricing (50%) emerged as the top three",
+     "Defined the user story: prospects needed to feel Fidelity’s security strength before they could trust its innovation story or accept its pricing",
+     "Built the strategy: construct a portfolio of targeted content solutions leading with cybersecurity to anchor the innovation and value narrative",
+     "Executed across tour experience, digital channels, and client-facing platforms with audience-specific messaging"
+   ],
+   metrics:[{val:"85%",label:"Sales win rate with lab tour (by tours)"},{val:"99%",label:"Win rate by assets"},{val:"$37B",label:"Net new assets moved"}]},
+  {label:"Case Study 2",title:"Operating Model Transformation",
+   desc:"A financial services business unit evolves past the Spotify-model Agile construct — requiring integrated change across strategy, org design, and portfolio management.",
+   context:"250% membership growth; transformation required connecting three bodies of work: strategy & prioritization, business model evolution, and tech portfolio management.",
+   approach:[
+     "Facilitated leader immersion sessions across all three change domains",
+     "Designed a change champion network (L3/L4 champions) to drive peer adoption",
+     "Built integrated communications campaign across all associates",
+     "Developed role-based training curriculum aligned to new operating model",
+     "Established adoption and sustainment plan with rewards and recognition",
+     "Deployed quarterly surveys and targeted focus groups to track progress"
+   ],
+   metrics:[{val:"3",label:"Bodies of work integrated"},{val:"NPS 94+",label:"Associate satisfaction"},{val:"250%",label:"Org growth navigated"}]}
+];
+
+const useCases=[
+  {icon:"⚙️",title:"Agile Transformation",
+   desc:"Moving organizations from ceremony compliance to genuine ownership — coaching self-discovery, outcome accountability, and delivery predictability.",
+   tags:["Agile 2.0","Coaching","Behavioral Change"]},
+  {icon:"🔄",title:"Tools & Platform Migration",
+   desc:"End-to-end change support for enterprise platform transitions — stakeholder impact assessment through adoption tracking and sustainment.",
+   tags:["SPM","Jira Align","Portfolio Tools"]},
+  {icon:"📊",title:"Portfolio Operating Model",
+   desc:"Shifting from project-based tracking to value stream governance — establishing the data hygiene, rhythms, and executive reporting that enable real decisions.",
+   tags:["Value Streams","Governance","QBR/QTR"]},
+  {icon:"🏗️",title:"Org Design & Restructuring",
+   desc:"Supporting business units through structural change — role clarity, accountability alignment, and the cultural scaffolding that makes new org designs stick.",
+   tags:["Org Design","Roles & Accountabilities","Culture"]},
+  {icon:"📈",title:"Executive Reporting Modernization",
+   desc:"Replacing reactive fire-drill reporting with structured, decision-ready cadences — building the trust and discipline that give leadership a reliable portfolio view.",
+   tags:["Executive Narratives","Portfolio Health","Data Integrity"]},
+  {icon:"🔗",title:"M&A Integration Readiness",
+   desc:"Preparing organizations for integration by establishing change infrastructure — stakeholder mapping, communications architecture, and adoption planning.",
+   tags:["Integration","Stakeholder Management","Communications"]}
+];
+
+let activePillar=0,activeAdkar=null,activeCase=0;
+
+function switchTab(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',i===j));
+}
+
+function renderPillars(){
+  const pg=document.getElementById('pillarGrid');
+  pg.innerHTML=pillars.map((p,i)=>`
+    <button class="pillar-btn ${i===activePillar?'on':''}"
+      style="border-top-color:${i===activePillar?p.color:'transparent'}"
+      onclick="selectPillar(${i})">
+      <div class="p-num" style="${i===activePillar?'color:'+p.color:''}">${p.num}</div>
+      <div class="p-name">${p.label}</div>
+    </button>`).join('');
+
+  const p=pillars[activePillar];
+  document.getElementById('pillarDetail').innerHTML=`
+    <div class="pillar-detail">
+      <div>
+        <div class="p-bg-num" style="color:${p.color}">${p.num}</div>
+        <div class="p-title">${p.label}</div>
+        <div class="p-tagline" style="color:${p.color}">${p.tagline}</div>
+        <div class="p-desc">${p.desc}</div>
+      </div>
+      <div>
+        <div class="items-head">Key Activities</div>
+        ${p.items.map(item=>`
+          <div class="item-row">
+            <div class="item-dot" style="background:${p.color}"></div>
+            <div class="item-text">${item}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  document.getElementById('flowBar').innerHTML=pillars.map((p,i)=>`
+    ${i>0?'<div class="flow-line"></div>':''}
+    <div class="flow-step">
+      <div class="flow-dot" style="background:${i===activePillar?p.color:'var(--paper-rule)'}"></div>
+      <div class="flow-label" style="color:${i===activePillar?p.color:'var(--ink-faint)'}">${p.label}</div>
+    </div>`).join('');
+}
+
+function selectPillar(i){activePillar=i;renderPillars()}
+
+function renderAdkar(){
+  document.getElementById('adkarList').innerHTML=adkar.map((a,i)=>`
+    <div class="adkar-item ${activeAdkar===i?'on':''}" onclick="toggleAdkar(${i})">
+      <div class="a-letter">${a.l}</div>
+      <div>
+        <div class="a-word">${a.word}</div>
+        <div class="a-phrase">"${a.phrase}"</div>
+        ${a.note?`<div class="a-note">${a.note}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function toggleAdkar(i){activeAdkar=activeAdkar===i?null:i;renderAdkar()}
+
+function renderLevers(){
+  document.getElementById('leversGrid').innerHTML=levers.map((l,i)=>`
+    <div class="lever-card">
+      <div class="l-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="l-div"></div>
+      <div>
+        <div class="l-name">${l.name}</div>
+        <div class="l-desc">${l.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderCases(){
+  document.getElementById('casesGrid').innerHTML=cases.map((c,i)=>`
+    <div class="case-card ${i===activeCase?'on':''}" onclick="selectCase(${i})">
+      <div class="c-label">${c.label}</div>
+      <div class="c-title">${c.title}</div>
+      <div class="c-desc">${c.desc}</div>
+    </div>`).join('');
+
+  const c=cases[activeCase];
+  document.getElementById('caseDetail').innerHTML=`
+    <div class="case-detail">
+      <div class="cd-title">${c.title}</div>
+      <div class="cd-sub">${c.context}</div>
+      <div class="cd-approach">How we approached it</div>
+      <ul class="cd-steps">
+        ${c.approach.map((s,i)=>`
+          <li class="cd-step">
+            <span class="cd-step-num">${i+1}</span>
+            <span>${s}</span>
+          </li>`).join('')}
+      </ul>
+      <div class="cd-metrics">
+        ${c.metrics.map(m=>`
+          <div class="cd-metric">
+            <div class="m-val">${m.val}</div>
+            <div class="m-label">${m.label}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function selectCase(i){activeCase=i;renderCases()}
+
+function renderUseCases(){
+  document.getElementById('ucGrid').innerHTML=useCases.map(u=>`
+    <div class="uc-card">
+      <span class="uc-icon">${u.icon}</span>
+      <div class="uc-title">${u.title}</div>
+      <div class="uc-desc">${u.desc}</div>
+      <div class="uc-tags">${u.tags.map(t=>`<span class="uc-tag">${t}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+renderPillars();renderAdkar();renderLevers();renderCases();renderUseCases();
+</script>
+</body>
+</html>
