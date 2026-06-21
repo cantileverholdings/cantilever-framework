@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Change Management Framework — Cantilever Holdings LLC</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-warm-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-warm-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -54,6 +56,17 @@ body{
   box-shadow:0 1px 12px rgba(139,105,20,0.06);
 }
 .header-left{}
+.header-brand{
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+  margin-bottom:0.3rem;
+}
+.header-brand img{
+  height:26px;
+  width:auto;
+  display:block;
+}
 .eyebrow{
   font-family:'DM Sans',sans-serif;
   font-size:10px;
@@ -61,7 +74,7 @@ body{
   letter-spacing:0.22em;
   text-transform:uppercase;
   color:var(--gold);
-  margin-bottom:0.3rem;
+  margin-bottom:0;
 }
 .header h1{
   font-family:'Cormorant Garamond',serif;
@@ -493,7 +506,10 @@ body{
 <!-- HEADER -->
 <div class="header">
   <div class="header-left">
-    <div class="eyebrow">Cantilever Holdings LLC · Transformation Practice</div>
+    <div class="header-brand">
+      <img src="/assets/icon-warm-256.png" alt="Cantilever Holdings mark"/>
+      <div class="eyebrow">Cantilever Holdings LLC · Transformation Practice</div>
+    </div>
     <h1>Change Management Framework</h1>
     <div class="header-tagline">Organizations don't change. People change.</div>
   </div>
